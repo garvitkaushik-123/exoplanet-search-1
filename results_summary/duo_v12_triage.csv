@@ -1,0 +1,12 @@
+tic,kind,P,n,depth,dur_h,offsets_d,off_spread,near_orbit_multiple
+41360602,multi,13.274,3,2099.0,12.0,"[np.float64(13.13), np.float64(11.38), np.float64(0.87)]",5.41,True
+73304157,multi,15.657,6,29134.0,2.0,"[np.float64(3.62), np.float64(6.6), np.float64(2.08), np.float64(4.44), np.float64(5.98), np.float64(7.46)]",1.84,False
+141866573,multi,20.479,3,3086.0,9.0,"[np.float64(1.25), np.float64(12.12), np.float64(12.22)]",5.15,False
+176985273,multi,13.523,4,1425.0,9.0,"[np.float64(1.34), np.float64(14.84), np.float64(0.87), np.float64(1.25)]",5.93,True
+238067847,multi,13.67,4,3658.0,12.0,"[np.float64(9.63), np.float64(9.25), np.float64(9.69), np.float64(11.13)]",0.72,True
+347594070,multi,24.065,3,3071.0,6.0,"[np.float64(2.0), np.float64(1.01), np.float64(14.25)]",6.02,False
+355425863,multi,139.961,4,8424.0,2.0,"[np.float64(3.77), np.float64(10.31), np.float64(7.56), np.float64(8.88)]",2.43,False
+375033375,multi,16.615,3,1396.0,12.0,"[np.float64(9.79), np.float64(13.75), np.float64(8.63)]",2.19,False
+439466626,multi,13.721,3,2654.0,12.0,"[np.float64(1.13), np.float64(1.25), np.float64(1.25)]",0.06,True
+354900220,duo,1825.233,2,6051.309867131212,10.5,"[np.float64(8.75), np.float64(0.78)]",3.98,False
+277837330,duo,1028.016,2,2173.7912773053613,12.0,"[np.float64(11.75), np.float64(0.88)]",5.44,True
