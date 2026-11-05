@@ -34,6 +34,7 @@ g = man.groupby("tid").sector.agg(lambda s: (s.min() <= 55) and (s.max() >= 90))
 keep = g[g].index
 man = man[man.tid.isin(keep)]
 man.to_csv("data/duo_manifest.csv", index=False)
+t["ID"] = t.ID.astype(int)
 t = t[t.ID.isin(keep)].rename(columns={"ID": "tid"})
 t["n_sectors"] = man.groupby("tid").size().reindex(t.tid).values
 t.to_csv("data/duo_targets.csv", index=False)
