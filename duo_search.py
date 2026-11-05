@@ -21,7 +21,7 @@ from wotan import flatten
 from astropy.timeseries import LombScargle
 
 warnings.filterwarnings("ignore")
-VERSION = "duo-v1.0"
+VERSION = "duo-v1.1"   # v1.1: gap-edge trimming + in-window coverage check (v1.0 events sat on data gaps)
 CACHE = "data/duolc"
 URL = "https://mast.stsci.edu/api/v0.1/Download/file?uri="
 G, RSUN, MSUN, DAY = 6.674e-11, 6.957e8, 1.989e30, 86400.0
@@ -91,6 +91,12 @@ def prepare(t, f, sec, trim=0.5):
     for s in segments(t):
         if s.size: keep[s] = (t[s] > t[s][0] + trim) & (t[s] < t[s][-1] - trim)
     t, f, sec = t[keep], f[keep], sec[keep]
+    # also trim around SHORT gaps (> 1 h): post-gap thermal ramps mimic transits (TIC 70796793 in v1.0)
+    g = np.where(np.diff(t) > 1 / 24)[0]
+    bad = np.zeros(t.size, bool)
+    for i in g:
+        bad |= ((t >= t[i] - 0.1) & (t <= t[i])) | ((t >= t[i + 1]) & (t <= t[i + 1] + 0.3))
+    t, f, sec = t[~bad], f[~bad], sec[~bad]
     f = prewhiten(t, f, sec)
     fl = flatten(t, f, method="biweight", window_length=1.5, break_tolerance=0.5)
     ok = np.isfinite(fl); t, fl, sec = t[ok], fl[ok], sec[ok]
@@ -125,6 +131,11 @@ def box_events(t, f, sec, durs, snr_min=7.0):
             taken.append(r.tc)
             inn = np.abs(ts - r.tc) < r.dur / 2
             frac_low = np.mean(fs[inn] > r.depth / 2)
+            win = ts[np.abs(ts - r.tc) < r.dur / 2 + 1 / 24]
+            cad = np.median(np.diff(ts))
+            coverage = inn.sum() * cad / r.dur
+            maxgap = np.max(np.diff(win)) if win.size > 1 else 1.0
+            if coverage < 0.7 or maxgap > 0.5 / 24: continue           # incomplete window or gap inside it
             ev.append(dict(tc=float(r.tc), dur_h=float(r.dur * 24), depth_ppm=float(r.depth * 1e6), snr=float(r.snr),
                            n_in=int(r.n), frac_low=float(frac_low), sector=int(sec[s][0]),
                            edge_d=float(min(r.tc - ts[0], ts[-1] - r.tc))))
