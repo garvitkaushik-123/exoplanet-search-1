@@ -20,3 +20,8 @@
 | 306990399 | 4.7052 | ~1,130 ppm | not new / likely FP | eumemic: close neighbour could produce the depth |
 | 320079492 | 1.0531 | ~190 ppm | not new | true period 0.527 d (our P is 2x), in eumemic list; weak (SNR 8) |
 | 331644554 | 0.5334 | ~250 ppm | rejected | equal-depth signal at phase 0.5 (15σ): true P = 1.067 d EB or sinusoidal variability |
+| 121604440 | 1.0808 | ~130 ppm | rejected | weak (SNR 8.5), secondary 3.4σ; Kepler-1972 host |
+| 167905035 | 22.5111 | ~310 ppm | not new | already a SPOC TCE (eumemic TCE and follow-up lists) |
+| 286763141 | 5.2445 | ~310 ppm | not new | in eumemic signal lists |
+| 298070500 | 16.0543 | ~305 ppm | not new | in eumemic vetted list; odd/even borderline (198 vs 368 ppm) |
+| 303204165 | 3.2931 | ~175 ppm | not new | in eumemic signal list |
