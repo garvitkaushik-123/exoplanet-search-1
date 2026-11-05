@@ -14,3 +14,9 @@
 | 240968774 | 3.1541 | ~590 ppm | not new | already a SPOC TCE (eumemic TCE and vetted lists); TOI-1467 host |
 | 259230140 | 0.6331 | ~110 ppm | rejected | SNR 4 in deep vetting; 12.7% phase-shuffle false-alarm rate |
 | 272375343 | 0.6951 | ~270 ppm | rejected | phase-0.5 brightening at 13.7σ: sinusoidal variability, not a transit |
+| 39516274 | 14.2159 | ~280 ppm | not new | clean, but already an eumemic candidate (and SPOC TCE list) |
+| 63212231 | 0.6085 | ~560 ppm | rejected | phase-0.5 brightening at 6.3σ, high shuffle scatter: variability |
+| 82452140 | 14.6781 | ~350 ppm | not new / suspicious | in eumemic follow-up list; momentum dumps 4x over-represented in transit |
+| 306990399 | 4.7052 | ~1,130 ppm | not new / likely FP | eumemic: close neighbour could produce the depth |
+| 320079492 | 1.0531 | ~190 ppm | not new | true period 0.527 d (our P is 2x), in eumemic list; weak (SNR 8) |
+| 331644554 | 0.5334 | ~250 ppm | rejected | equal-depth signal at phase 0.5 (15σ): true P = 1.067 d EB or sinusoidal variability |
