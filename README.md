@@ -40,6 +40,8 @@ The scripts need network access to `mast.stsci.edu`, `exoplanetarchive.ipac.calt
 
 - **QLP full-frame-image M dwarfs (about 400 stars, Tmag 11–13.5, old and new sectors):** no credible candidate. Rejections were dominated by stellar rotation, eclipsing binaries, highly variable stars and TESS-orbit (~13.7 d) systematics. The one survivor, TIC 161479114, failed the stellar-density check (`results_summary/TIC161479114_fold.png`).
 - **Known hosts (run in progress, 1,645 stars):** TIC 260004324 (LHS 1815) shows a 2.4734 d, ~70 ppm, SNR ~8 signal. It passes odd/even, secondary and momentum-dump checks, but its depth varies from year to year. The eumemic project's signal list already has it, and that project did not promote it, so it is on the watchlist only (`results_summary/vet_260004324.png`).
+- **Duo-transit search (1,181 FFI-only K/early-M dwarfs, duo-v1.1):** best signal TIC 355425863. It has two ~1% dips 699.8 d apart, confirmed in three pipelines, with difference imaging on target. Public ESO/FEROS logs show professional radial-velocity monitoring since 2020, so it is **not new** (`results_summary/TIC355425863_status.md`).
+- **Duplicate-check lesson:** a GitHub code search of the TIC number found public observatory logs, which revealed prior follow-up that the TOI list and web search missed.
 - **Known issue in v1.0:** the odd/even and secondary flags in `search_hosts.py` always pass because their errors come back as NaN. Every passer is re-tested by `vet_host_candidate.py`. The fix is planned for v1.1.
 
 ## Acknowledgements
