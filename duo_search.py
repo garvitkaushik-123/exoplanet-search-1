@@ -21,7 +21,7 @@ from wotan import flatten
 from astropy.timeseries import LombScargle
 
 warnings.filterwarnings("ignore")
-VERSION = "duo-v1.1"   # v1.1: gap-edge trimming + in-window coverage check (v1.0 events sat on data gaps)
+VERSION = "duo-v1.2"   # v1.2: no short-gap trimming; post-gap ramp test instead (v1.1 trimming cut real 30-min-cadence transits)
 CACHE = "data/duolc"
 URL = "https://mast.stsci.edu/api/v0.1/Download/file?uri="
 G, RSUN, MSUN, DAY = 6.674e-11, 6.957e8, 1.989e30, 86400.0
@@ -91,12 +91,8 @@ def prepare(t, f, sec, trim=0.5):
     for s in segments(t):
         if s.size: keep[s] = (t[s] > t[s][0] + trim) & (t[s] < t[s][-1] - trim)
     t, f, sec = t[keep], f[keep], sec[keep]
-    # also trim around SHORT gaps (> 1 h): post-gap thermal ramps mimic transits (TIC 70796793 in v1.0)
-    g = np.where(np.diff(t) > 1 / 24)[0]
-    bad = np.zeros(t.size, bool)
-    for i in g:
-        bad |= ((t >= t[i] - 0.1) & (t <= t[i])) | ((t >= t[i + 1]) & (t <= t[i + 1] + 0.3))
-    t, f, sec = t[~bad], f[~bad], sec[~bad]
+    # NOTE: no trimming around short (< 0.5 d) gaps any more. Early 30-min QLP sectors have many 1-4 h gaps and
+    # v1.1's trimming cut real transits (TIC 355425863, sector 2). Post-gap ramps are handled in box_events.
     f = prewhiten(t, f, sec)
     fl = flatten(t, f, method="biweight", window_length=1.5, break_tolerance=0.5)
     ok = np.isfinite(fl); t, fl, sec = t[ok], fl[ok], sec[ok]
@@ -117,7 +113,7 @@ def box_events(t, f, sec, durs, snr_min=7.0):
             centers = np.arange(ts[0] + D / 2, ts[-1] - D / 2, D / 4)
             if centers.size < 8: continue
             lo = np.searchsorted(ts, centers - D / 2); hi = np.searchsorted(ts, centers + D / 2)
-            n = hi - lo; ok = n >= 4
+            n = hi - lo; ok = n >= 3
             mean = np.where(ok, (cs[hi] - cs[lo]) / np.maximum(n, 1), np.nan)
             sig = 1.4826 * np.nanmedian(np.abs(mean - np.nanmedian(mean)))     # red-noise scatter at scale D
             snr = (mean - np.nanmedian(mean)) / sig if sig > 0 else np.zeros_like(mean)
@@ -127,20 +123,36 @@ def box_events(t, f, sec, durs, snr_min=7.0):
         taken = []
         for r in best.itertuples():
             if r.snr < snr_min: break
-            if any(abs(r.tc - x) < max(r.dur, 0.5) for x in taken): continue
-            taken.append(r.tc)
+            # overlapping windows are the same event only if their durations are similar: a broad ramp must not
+            # hide a short transit sitting on it (TIC 355425863, sector 28 in v1.1)
+            def distinct(x, d, dp):          # a narrow, much deeper dip on top of a broad feature
+                return (r.dur <= d / 3 and r.depth >= 2 * dp) or (d <= r.dur / 3 and dp >= 2 * r.depth)
+            if any(abs(r.tc - x) < max(r.dur, d, 0.5) and not distinct(x, d, dp) for x, d, dp in taken): continue
+            taken.append((r.tc, r.dur, r.depth))
             inn = np.abs(ts - r.tc) < r.dur / 2
             frac_low = np.mean(fs[inn] > r.depth / 2)
-            win = ts[np.abs(ts - r.tc) < r.dur / 2 + 1 / 24]
             cad = np.median(np.diff(ts))
             coverage = inn.sum() * cad / r.dur
-            maxgap = np.max(np.diff(win)) if win.size > 1 else 1.0
-            if coverage < 0.7 or maxgap > 0.5 / 24: continue           # incomplete window or gap inside it
+            if coverage < 0.5 or inn.sum() < 3: continue                 # too little of the window has data
+            # Post-gap ramp test (the TIC 70796793 failure): drop points within 0.3 d AFTER any gap > 1 h and
+            # require the dip to survive on the remaining in-transit points.
+            gi = np.where(np.diff(ts) > 1 / 24)[0]
+            ramp = np.zeros(ts.size, bool)
+            for g in gi:
+                ramp |= (ts >= ts[g + 1]) & (ts <= ts[g + 1] + 0.3)
+            ramp_hit = bool((ramp & inn).any())
+            if ramp_hit:
+                keep_in = inn & ~ramp
+                oot = (np.abs(ts - r.tc) > r.dur) & (np.abs(ts - r.tc) < r.dur + 1.0) & ~ramp
+                if keep_in.sum() < 3 or oot.sum() < 10: continue
+                d_rob = np.mean(fs[keep_in]) - np.median(fs[oot])
+                e_rob = 1.4826 * np.median(np.abs(fs[oot] - np.median(fs[oot]))) / np.sqrt(keep_in.sum())
+                if d_rob < 0.5 * r.depth or d_rob / e_rob < 5: continue
             ev.append(dict(tc=float(r.tc), dur_h=float(r.dur * 24), depth_ppm=float(r.depth * 1e6), snr=float(r.snr),
                            n_in=int(r.n), frac_low=float(frac_low), sector=int(sec[s][0]),
-                           edge_d=float(min(r.tc - ts[0], ts[-1] - r.tc))))
+                           edge_d=float(min(r.tc - ts[0], ts[-1] - r.tc)), ramp_hit=ramp_hit))
             if len(taken) >= 5: break
-    return [e for e in ev if 1000 <= e["depth_ppm"] <= 30000 and e["frac_low"] >= 0.5 and e["n_in"] >= 4]
+    return [e for e in ev if 1000 <= e["depth_ppm"] <= 30000 and e["frac_low"] >= 0.5 and e["n_in"] >= 3]
 
 
 def aliases(t, f, e1, e2, R, M, pmin=10.0):
