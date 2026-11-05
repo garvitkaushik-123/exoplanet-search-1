@@ -1,4 +1,5 @@
 .venv/
 data/
 results/
+external/
 __pycache__/

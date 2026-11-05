@@ -1,0 +1,14 @@
+tic,P,prot,rot_amp_ppm,rot_match,prim_ppm,sec_ppm,sec_sigma,toi,tfopwg_disp,verdict
+133240810,0.9607,12.4026,14984,False,1164,-364,-3.5,,,REJECT: secondary/out-of-transit variability (EB or variable star)
+319115652,0.6292,8.3875,8650,False,1239,-1141,-11.7,,,REJECT: secondary/out-of-transit variability (EB or variable star)
+429535074,0.989,12.7349,23128,False,1109,-12,-0.1,,,REJECT: highly variable star (>1% amplitude)
+305342132,0.9428,12.6324,23750,False,333,-811,-5.3,,,REJECT: secondary/out-of-transit variability (EB or variable star)
+24084211,0.6183,0.309,11818,True,2250,2204,20.2,,,REJECT: rotation
+26042880,5.6624,15.0,15625,False,5797,647,1.1,,,REJECT: highly variable star (>1% amplitude)
+255754236,7.4297,14.5623,26387,True,-1037,162,0.8,,,REJECT: rotation
+334638020,2.852,12.3209,15109,False,3260,1382,5.8,,,REJECT: secondary/out-of-transit variability (EB or variable star)
+429357471,1.0564,1.0595,19029,True,8714,-7917,-14.7,,,REJECT: rotation
+351231520,7.4485,12.5907,25052,False,2986,-355,-1.1,,,REJECT: highly variable star (>1% amplitude)
+365437609,1.3513,13.5967,23920,False,4440,-1955,-12.0,,,REJECT: secondary/out-of-transit variability (EB or variable star)
+425795422,0.8365,3.4992,26203,False,4366,-3487,-20.6,,,REJECT: secondary/out-of-transit variability (EB or variable star)
+161479114,0.8634,14.5588,8352,False,396,139,2.1,,,survives
