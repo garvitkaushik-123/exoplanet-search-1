@@ -8,9 +8,10 @@ Stars with >= 3 clean events: the largest subset of mutually consistent events t
 is reported as a multi-transit candidate (results/duo_multi.csv).
 Shortlist rules for duos: both events SNR >= 7, combined SNR >= 10, >= 1 surviving period alias,
 neither event common-mode, Rp < 22 R_earth (planet-sized, not a stellar eclipse)."""
-import glob, numpy as np, pandas as pd
+import glob, sys, numpy as np, pandas as pd
+PFX = sys.argv[1] if len(sys.argv) > 1 else "duo"      # "duo" (QLP FFI search) or "newsec" (new-sector 2-min search)
 
-d = pd.concat([pd.read_csv(f) for f in glob.glob("results/duo_[0-9]*.csv")], ignore_index=True)
+d = pd.concat([pd.read_csv(f) for f in glob.glob(f"results/{PFX}_[0-9]*.csv")], ignore_index=True)
 stars = d.tic.nunique(); err = d[d.kind == "error"].tic.nunique()
 s = d[d.kind == "single"].copy()
 tc = s.tc.values; tic = s.tic.values
@@ -31,9 +32,9 @@ u["cm2"] = [cm(b, k) for b, k in zip(u.tc2, u.tic)]
 clean = s[~s.common_mode].groupby("tic").size()
 u["n_clean_events"] = u.tic.map(clean).fillna(0).astype(int)
 u["short"] = (u.n_clean_events == 2) & (u.snr1 >= 7) & (u.snr2 >= 7) & (u.snr >= 10) & (u.n_aliases >= 1) & ~u.cm1 & ~u.cm2 & (u.rp_earth < 22)
-u.to_csv("results/duo_all_pairs.csv", index=False)
+u.to_csv(f"results/{PFX}_all_pairs.csv", index=False)
 sl = u[u.short].sort_values("snr", ascending=False)
-sl.to_csv("results/duo_shortlist.csv", index=False)
+sl.to_csv(f"results/{PFX}_shortlist.csv", index=False)
 
 # multi-transit: largest subset (>= 3) of consistent clean events sharing one period >= 10 d
 multi = []
@@ -57,7 +58,7 @@ for k, g in s[~s.common_mode].groupby("tic"):
                           depth_ppm=round(float(np.median(Dp[m]))), dur_h=float(np.median(Du[m])),
                           snr_min=round(float(g.snr.values[m].min()), 1), sectors=";".join(str(int(x)) for x in S[m]),
                           event_times=";".join(f"{x:.3f}" for x in np.sort(T[m])), soft_cm=bool(g.cm_soft.values[m].any())))
-mu = pd.DataFrame(multi); mu.to_csv("results/duo_multi.csv", index=False)
+mu = pd.DataFrame(multi); mu.to_csv(f"results/{PFX}_multi.csv", index=False)
 
 print(f"stars searched {stars} (errors {err}); single events {len(s)} in {s.tic.nunique()} stars; "
       f"common-mode events {int(s.common_mode.sum())}")
