@@ -158,7 +158,7 @@ Predicted mid-transit times (UTC) for the coming months, ±2.4 min (1σ). Each t
 
 # Data and code availability
 
-The search, vetting and fitting code, the frozen thresholds with their SHA-256 hashes, the light-curve products and all result tables are public at https://github.com/garvitkaushik-123/exoplanet-search The archived snapshot of this note, its data products and code is on Zenodo: https://doi.org/10.5281/zenodo.24005247.
+The search, vetting and fitting code, the frozen thresholds with their SHA-256 hashes, the light-curve products and all result tables are public at https://github.com/garvitkaushik-123/exoplanet-search. The archived snapshot of this note, its data products and code is on Zenodo: https://doi.org/10.5281/zenodo.24005247.
 
 # Use of AI tools
 
