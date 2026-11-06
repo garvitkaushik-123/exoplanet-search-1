@@ -88,6 +88,8 @@ if __name__ == "__main__":
             ("all, seed 2", [62, 63, 64, 65, 69, 89, 90], 2),
             ("2022 sectors 62-65", [62, 63, 64, 65], 3),
             ("2023-25 sectors 69,89,90", [69, 89, 90], 4)]
+    only = [int(x) for x in sys.argv[2].split(",")] if len(sys.argv) > 2 else None   # run indices, e.g. "1,2,3"
+    if only is not None: runs = [r for i, r in enumerate(runs) if i in only]
     rows = []
     for name, secs, seed in runs:
         print(f"== {name} (seed {seed}, N={N})", flush=True)
@@ -100,4 +102,5 @@ if __name__ == "__main__":
                 print(tg.probs.sort_values("prob", ascending=False).head(8)[["ID", "scenario", "prob"]].to_string(index=False))
         except Exception as e:
             import traceback; traceback.print_exc(limit=4); rows.append(dict(run=name, error=str(e)[:200]))
-    r = pd.DataFrame(rows); r.to_csv("results/triceratops_TIC308184057.csv", index=False); print("\n", r.to_string(index=False))
+    tag = "" if only is None else "_runs" + "-".join(map(str, only))
+    r = pd.DataFrame(rows); r.to_csv(f"results/triceratops_TIC308184057{tag}.csv", index=False); print("\n", r.to_string(index=False))
