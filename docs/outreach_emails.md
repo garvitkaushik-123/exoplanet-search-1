@@ -25,7 +25,7 @@ Would SG1 be able to schedule seeing-limited photometry of one transit, to confi
 
 Thank you for your time,
 Garvit Kaushik
-garvitkaushik123@gmail.com · https://github.com/garvitkaushik-123/exoplanet-search.
+garvitkaushik123@gmail.com · https://github.com/garvitkaushik-123/exoplanet-search
 
 ---
 
