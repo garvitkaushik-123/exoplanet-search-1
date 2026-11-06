@@ -25,3 +25,8 @@
 | 286763141 | 5.2445 | ~310 ppm | not new | in eumemic signal lists |
 | 298070500 | 16.0543 | ~305 ppm | not new | in eumemic vetted list; odd/even borderline (198 vs 368 ppm) |
 | 303204165 | 3.2931 | ~175 ppm | not new | in eumemic signal list |
+| 38584799 | 17.1293 | ~1,100 ppm | not new | in eumemic vetted list (SNR 20) |
+| 300381700 | 3.1450 | ~1,100 ppm | not new | eumemic: "previously reported (Zenodo)"; also a SPOC TCE |
+| 302381397 | 0.7076 | ~370 ppm | rejected | secondary 4.6σ, weak |
+| 408310006 | 15.1614 | ~370 ppm | not new | in eumemic list (WASP-166 host) |
+| 438702139 | 0.5546 | ~40 ppm | rejected | equal-depth phase-0.5 signal (9σ), high shuffle scatter: variability (HIP 65426, bright young star) |
