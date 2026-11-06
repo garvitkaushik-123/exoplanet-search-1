@@ -1,0 +1,11 @@
+body{font-family:"DejaVu Serif",Georgia,serif;font-size:10.5pt;line-height:1.45;max-width:7in;margin:0 auto;color:#111}
+h1.title{font-size:16pt;line-height:1.25;margin-bottom:4pt}
+p.author,p.date{margin:2pt 0;color:#333}
+h1{font-size:12.5pt;margin-top:16pt;border-bottom:1px solid #ccc;padding-bottom:2pt}
+table{border-collapse:collapse;margin:8pt 0;font-size:9.5pt;width:100%}
+th,td{border:1px solid #bbb;padding:3pt 5pt;text-align:left;vertical-align:top}
+th{background:#f0f0f0}
+figure{margin:10pt 0;page-break-inside:avoid;text-align:center}
+img{max-width:100%}
+figcaption{font-size:9pt;color:#333;text-align:left}
+code{font-size:9pt}

@@ -4,3 +4,4 @@ results/
 external/
 __pycache__/
 *_gaia_background.csv
+dist/

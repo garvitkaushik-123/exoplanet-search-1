@@ -29,11 +29,11 @@ How credit works: the discoverer's credit comes from (1) the timestamped preprin
 ## Phase 1: secure priority and make the case (this week)
 | # | Task | Owner | Status |
 |---|---|---|---|
-| 1.1 | MCMC transit fit with uncertainties (P, T0, Rp/R★, a/R★, b, T14, stellar density) | Claude | in progress |
-| 1.2 | Publication figures: fold and model, per-year depths, odd/even/secondary, difference image, TRICERATOPS | Claude | |
-| 1.3 | Observer ephemeris for the next 6 months, with night and altitude at CTIO, La Silla, SAAO, Siding Spring and Las Campanas | Claude | |
-| 1.4 | Preprint (PDF): methods, all tests, caveats, AI-use statement, data and code availability | Claude drafts, Garvit reviews | |
-| 1.5 | Data and code package (light curves, scripts, frozen hashes, preregistered ephemeris) | Claude | |
+| 1.1 | MCMC transit fit with uncertainties (P, T0, Rp/R★, a/R★, b, T14, stellar density) | Claude | ✅ `results_summary/fit_308184057_summary.csv` |
+| 1.2 | Publication figures: fold and model, per-year depths, odd/even/secondary, difference image, TRICERATOPS | Claude | ✅ `docs/figures/` |
+| 1.3 | Observer ephemeris for the next 6 months, with night and altitude at CTIO, La Silla, SAAO, Siding Spring and Las Campanas | Claude | ✅ `results_summary/TIC308184057_ephemeris_observability.csv` |
+| 1.4 | Preprint (PDF): methods, all tests, caveats, AI-use statement, data and code availability | Claude drafts, Garvit reviews | ✅ draft `docs/preprint/TIC308184057_preprint.pdf`; **Garvit to review** |
+| 1.5 | Data and code package (light curves, scripts, frozen hashes, preregistered ephemeris) | Claude | ✅ built by `make_zenodo_package.py` → `dist/TIC308184057_zenodo_v1.zip` (not in git) |
 | 1.6 | **Upload preprint and package to Zenodo to get a DOI** (zenodo.org is not reachable from this session) | **Garvit** | |
 | 1.7 | Decide whether the GitHub repo stays public. It already timestamps the work, but exposes the target before the DOI exists | **Garvit** | |
 
@@ -42,7 +42,7 @@ How credit works: the discoverer's credit comes from (1) the timestamped preprin
 |---|---|---|
 | 2.1 | Read ExoFOP's "Submitting Published Planet Candidate Guidelines" and confirm that a Zenodo or RNAAS publication qualifies | Garvit (ExoFOP is blocked here) |
 | 2.2 | Submit the CTOI on ExoFOP with the DOI (needs a free ExoFOP account) | Garvit |
-| 2.3 | Email TFOP working groups SG1, SG3 and SG4 with the preprint and ephemeris, offering co-authorship (draft in `docs/outreach_emails.md`) | Garvit sends, Claude drafts |
+| 2.3 | Email TFOP working groups SG1, SG3 and SG4 with the preprint and ephemeris, offering co-authorship | Garvit sends; drafts ✅ `docs/outreach_emails.md` |
 | 2.4 | Email 1–2 southern RV teams that follow warm and hot giants around faint stars (FEROS, HARPS or ESPRESSO users) with the same package | Garvit |
 | 2.5 | Optional: post the ephemeris for amateur photometry (AAVSO / Exoplanet Watch). A 1.2% dip on V ≈ 15.5 needs a ≥ 0.4 m telescope in the south | Garvit |
 
