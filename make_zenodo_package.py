@@ -19,7 +19,7 @@ meta = {"metadata": {"title": "TIC 308184057.01: a candidate warm sub-Saturn tra
         "upload_type": "publication", "publication_type": "preprint",
         "description": "Preprint, data products and code for the planet candidate TIC 308184057.01 (P = 6.1190153 d, Rp/R* = 0.106). Not peer reviewed; candidate status only.",
         "creators": [{"name": "Kaushik, Garvit", "affiliation": "Independent researcher"}],
-        "keywords": ["exoplanets", "TESS", "transit", "planet candidate", "TIC 308184057"], "license": "cc-by-4.0", "access_right": "open",
+        "doi": "10.5281/zenodo.24005247", "keywords": ["exoplanets", "TESS", "transit", "planet candidate", "TIC 308184057"], "license": "cc-by-4.0", "access_right": "open",
         "related_identifiers": [{"identifier": "https://github.com/garvitkaushik-123/exoplanet-search.", "relation": "isSupplementTo"}]}}
 json.dump(meta, open(out + "/zenodo_metadata.json", "w"), indent=2)
 with open(out + "/SHA256SUMS.txt", "w") as h:

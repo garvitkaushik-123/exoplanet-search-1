@@ -34,7 +34,7 @@ How credit works: the discoverer's credit comes from (1) the timestamped preprin
 | 1.3 | Observer ephemeris for the next 6 months, with night and altitude at CTIO, La Silla, SAAO, Siding Spring and Las Campanas | Claude | ✅ `results_summary/TIC308184057_ephemeris_observability.csv` |
 | 1.4 | Preprint (PDF): methods, all tests, caveats, AI-use statement, data and code availability | Claude drafts, Garvit reviews | ✅ draft `docs/preprint/TIC308184057_preprint.pdf`; **Garvit to review** |
 | 1.5 | Data and code package (light curves, scripts, frozen hashes, preregistered ephemeris) | Claude | ✅ built by `make_zenodo_package.py` → `dist/TIC308184057_zenodo_v1.zip` (not in git) |
-| 1.6 | **Upload preprint and package to Zenodo to get a DOI** (zenodo.org is not reachable from this session) | **Garvit** | |
+| 1.6 | **Upload preprint and package to Zenodo to get a DOI** (zenodo.org is not reachable from this session) | **Garvit** | DOI reserved: 10.5281/zenodo.24005247 (draft; publish pending) |
 | 1.7 | Decide whether the GitHub repo stays public. It already timestamps the work, but exposes the target before the DOI exists | **Garvit** | |
 
 ## Phase 2: get follow-up (weeks 1–6)

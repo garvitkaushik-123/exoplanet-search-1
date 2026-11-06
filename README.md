@@ -2,7 +2,7 @@
 
 A transit search for new exoplanets in public NASA TESS data, run by an independent researcher with Claude Code.
 
-**Status (5 Nov 2026): no new planet or credible candidate yet.** See [Results so far](#results-so-far).
+**Status (6 Nov 2026): one possible new planet candidate, TIC 308184057.01** (P = 6.119 d, ~0.76 R_J, not validated). Preprint and data: https://doi.org/10.5281/zenodo.24005247. See `results_summary/TIC308184057_status.md` and `docs/CONFIRMATION_PLAN.md`.
 
 ## Approach
 

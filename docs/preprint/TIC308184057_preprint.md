@@ -1,7 +1,7 @@
 ---
 title: "TIC 308184057.01: a candidate warm sub-Saturn transiting a faint K dwarf, found in a TESS full-frame-image search of stars below the QLP magnitude limit"
 author: "Garvit Kaushik (independent researcher; garvitkaushik123@gmail.com)"
-date: "Version 1 — 2026-11-06 (DRAFT, not peer reviewed)"
+date: "Version 1 — 2026-11-06 — not peer reviewed — DOI: 10.5281/zenodo.24005247"
 ---
 
 # Abstract
@@ -158,7 +158,7 @@ Predicted mid-transit times (UTC) for the coming months, ±2.4 min (1σ). Each t
 
 # Data and code availability
 
-The search, vetting and fitting code, the frozen thresholds with their SHA-256 hashes, the light-curve products and all result tables are public at https://github.com/garvitkaushik-123/exoplanet-search. (Note: the repository name ends with a dot.) The archived snapshot for this note is on Zenodo under DOI [to be added on upload].
+The search, vetting and fitting code, the frozen thresholds with their SHA-256 hashes, the light-curve products and all result tables are public at https://github.com/garvitkaushik-123/exoplanet-search. (Note: the repository name ends with a dot.) The archived snapshot of this note, its data products and code is on Zenodo: https://doi.org/10.5281/zenodo.24005247.
 
 # Use of AI tools
 
